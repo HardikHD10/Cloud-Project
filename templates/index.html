@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Demo</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    h3 {
+      margin-top: 1.5rem;
+      color: #333;
+    }
+    .btn {
+      border: 2px solid #333;
+      color: #333;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Demo</h1>
+    <form action="/" method="post">
+      <label for="model">Choose a model:</label>
+      <select name="model" id="model">
+        <option value="image_captioning">Image Captioning</option>
+        <option value="sentiment_analysis">Sentiment Analysis</option>
+      </select>
+      <input type="submit" value="Select" class="btn">
+    </form>
+    {% if selected_model == "image_captioning" %}
+    <h3>Image Captioning</h3>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <label for="file">Choose an image:</label>
+      <input type="file" name="file" id="file" required>
+      <input type="submit" value="Submit" class="btn">
+    </form>
+    {% elif selected_model == "sentiment_analysis" %}
+    <h3>Sentiment Analysis</h3>
+    <form action="/sentiment_analysis" method="post">
+      <label for="text">Enter text:</label>
+      <textarea name="text" id="text" cols="40" rows="5" required></textarea>
+      <input type="submit" value="Analyze Sentiment" class="btn">
+    </form>
+    {% endif %}
+  </div>
+</body>
+</html>

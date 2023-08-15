@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AI Demo Results</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 2rem;
+    }
+    h3 {
+      margin-top: 1.5rem;
+      color: #333;
+    }
+    .result {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 1rem;
+    }
+    .btn {
+      border: 2px solid #333;
+      color: #333;
+      background-color: white;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      display: block;
+      margin: 0 auto;
+      margin-top: 2rem;
+    }
+    .image-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>AI Demo Results</h1>
+    {% if selected_model == "image_captioning" %}
+    <h3>Image Captioning</h3>
+    <div class="image-container">
+      <img src="{{ url_for('display_image', filename=filename) }}" alt="Uploaded image" style="width:100%; max-width: 600px;">
+    </div>
+    <p class="result"><strong>Greedy Search:</strong> {{ caption_greedy }}</p>
+    <p class="result"><strong>Beam Search (k=3):</strong> {{ caption_beam_3 }}</p>
+    <p class="result"><strong>Beam Search (k=5):</strong> {{ caption_beam_5 }}</p>
+    {% elif selected_model == "sentiment_analysis" %}
+    <h3>Sentiment Analysis</h3>
+    <p class="result">Sentiment: {{ sentiment }}</p>
+    {% endif %}
+    <a href="{{ url_for('index') }}"><button class="btn">Back</button></a>
+  </div>
+</body>
+</html>
